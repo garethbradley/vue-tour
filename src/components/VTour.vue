@@ -32,7 +32,7 @@
         :highlight="customOptions.highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
         :debug="customOptions.debug"
-        @targetNotFound="$emit('targetNotFound', $event)"
+        @targetNotFound="targetNotFound"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -219,6 +219,10 @@ export default {
     isKeyEnabled (key) {
       const { enabledNavigationKeys } = this.customOptions
       return enabledNavigationKeys.hasOwnProperty(key) ? enabledNavigationKeys[key] : true
+    },
+    targetNotFound (event) {
+      this.$emit('targetNotFound', event)
+      this.nextStep()
     }
   }
 }
