@@ -70,6 +70,9 @@ export default {
     }
   },
   mounted () {
+    if (this.customOptions.debug) {
+      console.log('[Vue Tour] Vue Tour loaded')
+    }
     this.$tours[this.name] = this
   },
   beforeDestroy () {
