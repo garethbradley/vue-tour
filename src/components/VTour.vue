@@ -220,9 +220,15 @@ export default {
       const { enabledNavigationKeys } = this.customOptions
       return enabledNavigationKeys.hasOwnProperty(key) ? enabledNavigationKeys[key] : true
     },
-    targetNotFound (event) {
-      this.$emit('targetNotFound', event)
-      this.nextStep()
+    targetNotFound (step) {
+      if (this.customOptions.debug) {
+        console.log('[Vue Tour] Target Not Found:', step)
+      }
+
+      this.$emit('targetNotFound', step)
+      if (!this.customOptions.stopOnTargetNotFound) {
+        this.nextStep()
+      }
     }
   }
 }
